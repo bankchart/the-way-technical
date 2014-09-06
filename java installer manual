@@ -1,0 +1,49 @@
+ลบ openjdk ออกก่อน
+sudo apt-get purge openjdk-*
+
+
+สร้างโฟลเดอร์ใหม่ สำหรับเก็บ jdk/jre ใน usr/local/java (ปกติ จะถูกเก็บไว้ที่ usr/lib/jvm)
+
+
+ย้ายไฟล์จาก directory ที่ได้ทำการดาวน์โหลด JDK มา ย้ายไปที่ /usr/local/java
+
+
+ทำการเปลี่ยน Permission เพื่อให้ทุกยูเซอร์เรียกใช้ได้
+sudo -s chmod a+x jdk-7u51-linux-x64.tar.gz
+
+
+ทำการ unzip ไฟล์ .tar.gz ออกมา
+sudo -s tar xvzf jdk-7u51-linux-x64.tar.gz
+
+
+ทำการสร้าง System Path
+sudo gedit etc/profile
+JAVA_HOME=/usr/local/java/jdk1.7.0_51
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
+JRE_HOME=/usr/local/java/jdk1.7.0_51/jre
+PATH=$PATH:$HOME/bin:$JRE_HOME/bin
+export JAVA_HOME
+export JRE_HOME
+export PATH
+คลิ๊ก save แล้ว exit
+ถ้าเป็น sudo nano กด Ctrl + X แล้วกด Y
+
+set JDK
+sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/local/java/jdk1.7.0_51/bin/javac" 1
+sudo update-alternatives --set javac /usr/local/java/jdk1.7.0_51/bin/javac
+
+
+set JRE
+sudo update-alternatives --install "/usr/bin/java" "java" "/usr/local/java/jdk1.7.0_51/jre/bin/java" 1 
+sudo update-alternatives --set java /usr/local/java/jdk1.7.0_51/jre/bin/java
+
+
+completed..... or reboot system or logout and login
+
+
+=====================================================================================================
+
+http://stackoverflow.com/questions/18686105/jdk-environment-variable-ubuntu-12-04-with-tomcat
+
+
+
